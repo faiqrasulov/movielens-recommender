@@ -6,10 +6,15 @@ export OPENBLAS_NUM_THREADS ?= 2
 export MKL_NUM_THREADS ?= 2
 export VECLIB_MAXIMUM_THREADS ?= 2
 
-.PHONY: install data run test lint clean
+.PHONY: install install-locked data run test lint clean
 
 install:
 	$(PYTHON) -m pip install -e ".[dev]"
+
+# Exact package versions that produced the committed reports/ (see requirements.lock).
+install-locked:
+	$(PYTHON) -m pip install -r requirements.lock
+	$(PYTHON) -m pip install -e . --no-deps
 
 # Download MovieLens 100K from GroupLens into data/ (cached; the licence forbids redistribution).
 data:

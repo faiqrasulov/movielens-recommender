@@ -13,9 +13,10 @@ baselines, and implicit ALS, BPR and EASE^R built from scratch in NumPy/SciPy, c
 MovieLens 100K. The test set is each user's last ratings; `make run` (about 2-3 minutes on a laptop
 CPU) produces every number below and stores it in [`reports/metrics.json`](reports/metrics.json).
 
-- **EASE^R is the most accurate model:** NDCG@10 **0.137** (95% CI 0.124-0.150) over 828 users,
-  **1.9x the most-popular baseline** (0.073; paired difference +0.064, CI +0.051 to +0.077).
-  iALS (0.132) is statistically tied with it (difference +0.005, CI -0.001 to +0.011).
+- **EASE^R and iALS are the most accurate models:** EASE^R has NDCG@10 **0.137** (95% CI
+  0.124-0.150) over 828 users, **1.9x the most-popular baseline** (0.073; paired difference
+  +0.064, CI +0.051 to +0.077). iALS (0.132) is statistically tied with it (difference +0.005,
+  CI -0.001 to +0.011).
 - **A random split would have doubled every personalised score** (1.9-2.1x; EASE 0.283) and
   inflated the gain over popularity from +0.064 to +0.181 NDCG.
 - **Accurate and less popularity-biased:** personalised models recommend movies liked by 18-21% of
@@ -249,6 +250,11 @@ make install          # pip install -e ".[dev]"
 make run              # downloads MovieLens 100K (~5 MB) into data/, then reproduces reports/
 make test             # 30 tests, ~2 s, no network
 ```
+
+`make install` takes the newest compatible packages. To reproduce the committed `reports/`, use
+`make install-locked` instead: it installs the versions pinned in
+[`requirements.lock`](requirements.lock) (Python 3.12), with which `make run` regenerates every
+value in `reports/metrics.json` exactly (checked on macOS arm64).
 
 ```bash
 # Explained top-10 for one MovieLens user (EASE fitted on all ratings, tuned lambda)

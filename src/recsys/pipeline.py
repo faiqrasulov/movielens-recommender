@@ -10,6 +10,7 @@ import platform
 import sys
 import time
 from dataclasses import dataclass
+from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
@@ -75,11 +76,19 @@ def _clean(obj: Any) -> Any:
     return obj
 
 
+def _date(ts: int) -> str:
+    return datetime.fromtimestamp(int(ts), tz=timezone.utc).strftime("%Y-%m-%d")
+
+
 def dataset_summary(data: Interactions) -> dict[str, Any]:
     """Basic counts of the interaction data."""
     pos = data.rating >= POSITIVE_THRESHOLD
     _, per_user_time = np.unique(np.stack([data.user, data.timestamp]), axis=1,
                                  return_counts=True)
+    first = np.full(data.n_users, np.iinfo(np.int64).max)
+    last = np.zeros(data.n_users, dtype=np.int64)
+    np.minimum.at(first, data.user, data.timestamp)
+    np.maximum.at(last, data.user, data.timestamp)
     return {
         "n_users": data.n_users,
         "n_items": data.n_items,
@@ -87,8 +96,9 @@ def dataset_summary(data: Interactions) -> dict[str, Any]:
         "positive_share": float(pos.mean()),
         "n_positives": int(pos.sum()),
         "density": len(data) / (data.n_users * data.n_items),
-        "first_timestamp": int(data.timestamp.min()),
-        "last_timestamp": int(data.timestamp.max()),
+        "first_date": _date(data.timestamp.min()),
+        "last_date": _date(data.timestamp.max()),
+        "share_users_with_all_ratings_within_one_day": float(np.mean(last - first < 86_400)),
         # MovieLens stored ratings in batches: share of ratings that share their user's
         # timestamp with at least one other rating.
         "share_ratings_in_same_second_batch": float(
@@ -96,15 +106,22 @@ def dataset_summary(data: Interactions) -> dict[str, Any]:
     }
 
 
-def _split_summary(split: Split, valid: Task, test: Task) -> dict[str, Any]:
-    return {
+def _split_summary(data: Interactions, split: Split, valid: Task, test: Task) -> dict[str, Any]:
+    held_out = np.bincount(data.user[split.test], minlength=data.n_users)
+    out: dict[str, Any] = {
         "n_train": int(split.train.size),
         "n_valid": int(split.valid.size),
         "n_test": int(split.test.size),
         "valid_users": int(valid.users.size),
         "test_users": int(test.users.size),
         "test_positives_of_evaluated_users": int(test.truth[test.users].nnz),
+        "test_ratings_per_user_min_median_max": [
+            int(held_out.min()), float(np.median(held_out)), int(held_out.max())],
     }
+    if split.name == "global_temporal":
+        out["valid_cutoff"] = _date(split.valid_asof[0])
+        out["test_cutoff"] = _date(split.test_asof[0])
+    return out
 
 
 def _fit(name: str, params: dict[str, Any], task: Task) -> Recommender:
@@ -243,7 +260,8 @@ def run(data: Interactions, out_dir: str | Path, cfg: Config = Config(),
     protocols: dict[str, Any] = {}
     for pname, split in splits.items():
         task = test if split is main else final_task(data, split)
-        entry: dict[str, Any] = {"summary": _split_summary(split, tuning_task(data, split), task),
+        entry: dict[str, Any] = {"summary": _split_summary(data, split, tuning_task(data, split),
+                                                             task),
                                  "ndcg": {}, "ndcg_ci": {}, "recall": {}}
         for name in MODEL_ORDER:
             ev = evals[name] if split is main else evaluate(_fit(name, best[name], task),

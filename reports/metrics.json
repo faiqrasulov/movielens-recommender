@@ -1,0 +1,1484 @@
+{
+  "dataset": {
+    "name": "MovieLens 100K",
+    "n_users": 943,
+    "n_items": 1682,
+    "n_ratings": 100000,
+    "positive_share": 0.55375,
+    "n_positives": 55375,
+    "density": 0.0630467,
+    "first_date": "1997-09-20",
+    "last_date": "1998-04-22",
+    "share_users_with_all_ratings_within_one_day": 0.676564,
+    "share_ratings_in_same_second_batch": 0.75772
+  },
+  "environment": {
+    "python": "3.12.4",
+    "numpy": "1.26.4",
+    "scipy": "1.13.1"
+  },
+  "setup": {
+    "k": 10,
+    "positive_threshold": 4,
+    "n_holdout_per_user": 5,
+    "n_bootstrap": 2000,
+    "seed": 0,
+    "main_protocol": "per_user_temporal"
+  },
+  "tuning": {
+    "MostPopular": {
+      "best_params": {},
+      "best_valid_ndcg": 0.0616067,
+      "n_configs": 1,
+      "trials": [
+        {
+          "params": {},
+          "valid_ndcg": 0.0616067
+        }
+      ]
+    },
+    "RecentPopular": {
+      "best_params": {
+        "window_days": 120
+      },
+      "best_valid_ndcg": 0.0617176,
+      "n_configs": 6,
+      "trials": [
+        {
+          "params": {
+            "window_days": 7
+          },
+          "valid_ndcg": 0.0577249
+        },
+        {
+          "params": {
+            "window_days": 14
+          },
+          "valid_ndcg": 0.0594077
+        },
+        {
+          "params": {
+            "window_days": 30
+          },
+          "valid_ndcg": 0.0594401
+        },
+        {
+          "params": {
+            "window_days": 60
+          },
+          "valid_ndcg": 0.0612662
+        },
+        {
+          "params": {
+            "window_days": 120
+          },
+          "valid_ndcg": 0.0617176
+        },
+        {
+          "params": {
+            "window_days": null
+          },
+          "valid_ndcg": 0.0600044
+        }
+      ]
+    },
+    "ItemKNN": {
+      "best_params": {
+        "k": 200,
+        "shrink": 10
+      },
+      "best_valid_ndcg": 0.121904,
+      "n_configs": 20,
+      "trials": [
+        {
+          "params": {
+            "k": 25,
+            "shrink": 0
+          },
+          "valid_ndcg": 0.116648
+        },
+        {
+          "params": {
+            "k": 25,
+            "shrink": 10
+          },
+          "valid_ndcg": 0.115917
+        },
+        {
+          "params": {
+            "k": 25,
+            "shrink": 50
+          },
+          "valid_ndcg": 0.1167
+        },
+        {
+          "params": {
+            "k": 25,
+            "shrink": 100
+          },
+          "valid_ndcg": 0.11432
+        },
+        {
+          "params": {
+            "k": 50,
+            "shrink": 0
+          },
+          "valid_ndcg": 0.114737
+        },
+        {
+          "params": {
+            "k": 50,
+            "shrink": 10
+          },
+          "valid_ndcg": 0.110908
+        },
+        {
+          "params": {
+            "k": 50,
+            "shrink": 50
+          },
+          "valid_ndcg": 0.111803
+        },
+        {
+          "params": {
+            "k": 50,
+            "shrink": 100
+          },
+          "valid_ndcg": 0.115075
+        },
+        {
+          "params": {
+            "k": 100,
+            "shrink": 0
+          },
+          "valid_ndcg": 0.116135
+        },
+        {
+          "params": {
+            "k": 100,
+            "shrink": 10
+          },
+          "valid_ndcg": 0.116475
+        },
+        {
+          "params": {
+            "k": 100,
+            "shrink": 50
+          },
+          "valid_ndcg": 0.115047
+        },
+        {
+          "params": {
+            "k": 100,
+            "shrink": 100
+          },
+          "valid_ndcg": 0.118582
+        },
+        {
+          "params": {
+            "k": 200,
+            "shrink": 0
+          },
+          "valid_ndcg": 0.121052
+        },
+        {
+          "params": {
+            "k": 200,
+            "shrink": 10
+          },
+          "valid_ndcg": 0.121904
+        },
+        {
+          "params": {
+            "k": 200,
+            "shrink": 50
+          },
+          "valid_ndcg": 0.117113
+        },
+        {
+          "params": {
+            "k": 200,
+            "shrink": 100
+          },
+          "valid_ndcg": 0.111257
+        },
+        {
+          "params": {
+            "k": 400,
+            "shrink": 0
+          },
+          "valid_ndcg": 0.116323
+        },
+        {
+          "params": {
+            "k": 400,
+            "shrink": 10
+          },
+          "valid_ndcg": 0.114028
+        },
+        {
+          "params": {
+            "k": 400,
+            "shrink": 50
+          },
+          "valid_ndcg": 0.108407
+        },
+        {
+          "params": {
+            "k": 400,
+            "shrink": 100
+          },
+          "valid_ndcg": 0.101781
+        }
+      ]
+    },
+    "iALS": {
+      "best_params": {
+        "factors": 32,
+        "reg": 10,
+        "alpha": 0,
+        "iterations": 5
+      },
+      "best_valid_ndcg": 0.130489,
+      "n_configs": 36,
+      "trials": [
+        {
+          "params": {
+            "factors": 32,
+            "reg": 3,
+            "alpha": 0,
+            "iterations": 3
+          },
+          "valid_ndcg": 0.123187
+        },
+        {
+          "params": {
+            "factors": 32,
+            "reg": 3,
+            "alpha": 0.3,
+            "iterations": 7
+          },
+          "valid_ndcg": 0.122636
+        },
+        {
+          "params": {
+            "factors": 32,
+            "reg": 3,
+            "alpha": 1,
+            "iterations": 7
+          },
+          "valid_ndcg": 0.121431
+        },
+        {
+          "params": {
+            "factors": 32,
+            "reg": 3,
+            "alpha": 10,
+            "iterations": 4
+          },
+          "valid_ndcg": 0.113325
+        },
+        {
+          "params": {
+            "factors": 32,
+            "reg": 10,
+            "alpha": 0,
+            "iterations": 5
+          },
+          "valid_ndcg": 0.130489
+        },
+        {
+          "params": {
+            "factors": 32,
+            "reg": 10,
+            "alpha": 0.3,
+            "iterations": 5
+          },
+          "valid_ndcg": 0.129226
+        },
+        {
+          "params": {
+            "factors": 32,
+            "reg": 10,
+            "alpha": 1,
+            "iterations": 7
+          },
+          "valid_ndcg": 0.1268
+        },
+        {
+          "params": {
+            "factors": 32,
+            "reg": 10,
+            "alpha": 10,
+            "iterations": 4
+          },
+          "valid_ndcg": 0.116285
+        },
+        {
+          "params": {
+            "factors": 32,
+            "reg": 30,
+            "alpha": 0,
+            "iterations": 15
+          },
+          "valid_ndcg": 0.0820115
+        },
+        {
+          "params": {
+            "factors": 32,
+            "reg": 30,
+            "alpha": 0.3,
+            "iterations": 13
+          },
+          "valid_ndcg": 0.0881782
+        },
+        {
+          "params": {
+            "factors": 32,
+            "reg": 30,
+            "alpha": 1,
+            "iterations": 12
+          },
+          "valid_ndcg": 0.11599
+        },
+        {
+          "params": {
+            "factors": 32,
+            "reg": 30,
+            "alpha": 10,
+            "iterations": 5
+          },
+          "valid_ndcg": 0.123328
+        },
+        {
+          "params": {
+            "factors": 64,
+            "reg": 3,
+            "alpha": 0,
+            "iterations": 5
+          },
+          "valid_ndcg": 0.114377
+        },
+        {
+          "params": {
+            "factors": 64,
+            "reg": 3,
+            "alpha": 0.3,
+            "iterations": 5
+          },
+          "valid_ndcg": 0.115029
+        },
+        {
+          "params": {
+            "factors": 64,
+            "reg": 3,
+            "alpha": 1,
+            "iterations": 8
+          },
+          "valid_ndcg": 0.115069
+        },
+        {
+          "params": {
+            "factors": 64,
+            "reg": 3,
+            "alpha": 10,
+            "iterations": 15
+          },
+          "valid_ndcg": 0.106115
+        },
+        {
+          "params": {
+            "factors": 64,
+            "reg": 10,
+            "alpha": 0,
+            "iterations": 15
+          },
+          "valid_ndcg": 0.129276
+        },
+        {
+          "params": {
+            "factors": 64,
+            "reg": 10,
+            "alpha": 0.3,
+            "iterations": 4
+          },
+          "valid_ndcg": 0.126994
+        },
+        {
+          "params": {
+            "factors": 64,
+            "reg": 10,
+            "alpha": 1,
+            "iterations": 7
+          },
+          "valid_ndcg": 0.121077
+        },
+        {
+          "params": {
+            "factors": 64,
+            "reg": 10,
+            "alpha": 10,
+            "iterations": 11
+          },
+          "valid_ndcg": 0.111424
+        },
+        {
+          "params": {
+            "factors": 64,
+            "reg": 30,
+            "alpha": 0,
+            "iterations": 15
+          },
+          "valid_ndcg": 0.082462
+        },
+        {
+          "params": {
+            "factors": 64,
+            "reg": 30,
+            "alpha": 0.3,
+            "iterations": 15
+          },
+          "valid_ndcg": 0.0885966
+        },
+        {
+          "params": {
+            "factors": 64,
+            "reg": 30,
+            "alpha": 1,
+            "iterations": 11
+          },
+          "valid_ndcg": 0.115785
+        },
+        {
+          "params": {
+            "factors": 64,
+            "reg": 30,
+            "alpha": 10,
+            "iterations": 4
+          },
+          "valid_ndcg": 0.123025
+        },
+        {
+          "params": {
+            "factors": 128,
+            "reg": 3,
+            "alpha": 0,
+            "iterations": 2
+          },
+          "valid_ndcg": 0.117151
+        },
+        {
+          "params": {
+            "factors": 128,
+            "reg": 3,
+            "alpha": 0.3,
+            "iterations": 2
+          },
+          "valid_ndcg": 0.116257
+        },
+        {
+          "params": {
+            "factors": 128,
+            "reg": 3,
+            "alpha": 1,
+            "iterations": 2
+          },
+          "valid_ndcg": 0.110124
+        },
+        {
+          "params": {
+            "factors": 128,
+            "reg": 3,
+            "alpha": 10,
+            "iterations": 3
+          },
+          "valid_ndcg": 0.0990624
+        },
+        {
+          "params": {
+            "factors": 128,
+            "reg": 10,
+            "alpha": 0,
+            "iterations": 4
+          },
+          "valid_ndcg": 0.129399
+        },
+        {
+          "params": {
+            "factors": 128,
+            "reg": 10,
+            "alpha": 0.3,
+            "iterations": 3
+          },
+          "valid_ndcg": 0.12936
+        },
+        {
+          "params": {
+            "factors": 128,
+            "reg": 10,
+            "alpha": 1,
+            "iterations": 3
+          },
+          "valid_ndcg": 0.126273
+        },
+        {
+          "params": {
+            "factors": 128,
+            "reg": 10,
+            "alpha": 10,
+            "iterations": 3
+          },
+          "valid_ndcg": 0.108706
+        },
+        {
+          "params": {
+            "factors": 128,
+            "reg": 30,
+            "alpha": 0,
+            "iterations": 15
+          },
+          "valid_ndcg": 0.0828535
+        },
+        {
+          "params": {
+            "factors": 128,
+            "reg": 30,
+            "alpha": 0.3,
+            "iterations": 15
+          },
+          "valid_ndcg": 0.0897894
+        },
+        {
+          "params": {
+            "factors": 128,
+            "reg": 30,
+            "alpha": 1,
+            "iterations": 13
+          },
+          "valid_ndcg": 0.115872
+        },
+        {
+          "params": {
+            "factors": 128,
+            "reg": 30,
+            "alpha": 10,
+            "iterations": 4
+          },
+          "valid_ndcg": 0.126152
+        }
+      ],
+      "best_curve": {
+        "epoch": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15
+        ],
+        "valid_ndcg": [
+          0.0687719,
+          0.0955043,
+          0.121098,
+          0.12406,
+          0.130489,
+          0.128527,
+          0.1278,
+          0.126814,
+          0.126769,
+          0.125346,
+          0.125232,
+          0.126026,
+          0.125939,
+          0.126372,
+          0.12678
+        ],
+        "train_loss": [
+          49271.4,
+          48720.7,
+          38579.8,
+          36973.1,
+          36539.7,
+          36264.1,
+          36091.4,
+          35994.0,
+          35951.2,
+          35936.1,
+          35929.7,
+          35925.8,
+          35923.0,
+          35920.8,
+          35919.1,
+          35917.7
+        ]
+      }
+    },
+    "BPR": {
+      "best_params": {
+        "factors": 128,
+        "lr": 0.05,
+        "reg": 0.01,
+        "epochs": 120
+      },
+      "best_valid_ndcg": 0.125713,
+      "n_configs": 4,
+      "trials": [
+        {
+          "params": {
+            "factors": 64,
+            "lr": 0.05,
+            "reg": 0.003,
+            "epochs": 85
+          },
+          "valid_ndcg": 0.108592
+        },
+        {
+          "params": {
+            "factors": 64,
+            "lr": 0.05,
+            "reg": 0.01,
+            "epochs": 75
+          },
+          "valid_ndcg": 0.119022
+        },
+        {
+          "params": {
+            "factors": 128,
+            "lr": 0.05,
+            "reg": 0.003,
+            "epochs": 80
+          },
+          "valid_ndcg": 0.115135
+        },
+        {
+          "params": {
+            "factors": 128,
+            "lr": 0.05,
+            "reg": 0.01,
+            "epochs": 120
+          },
+          "valid_ndcg": 0.125713
+        }
+      ],
+      "best_curve": {
+        "epoch": [
+          5,
+          10,
+          15,
+          20,
+          25,
+          30,
+          35,
+          40,
+          45,
+          50,
+          55,
+          60,
+          65,
+          70,
+          75,
+          80,
+          85,
+          90,
+          95,
+          100,
+          105,
+          110,
+          115,
+          120
+        ],
+        "valid_ndcg": [
+          0.0628189,
+          0.0832602,
+          0.0931448,
+          0.100091,
+          0.103386,
+          0.109252,
+          0.108147,
+          0.108696,
+          0.11515,
+          0.117489,
+          0.114595,
+          0.117662,
+          0.113329,
+          0.119024,
+          0.120654,
+          0.119887,
+          0.117761,
+          0.119777,
+          0.121137,
+          0.117296,
+          0.116802,
+          0.116931,
+          0.121058,
+          0.125713
+        ],
+        "train_loss": [
+          0.472988,
+          0.336448,
+          0.296781,
+          0.272516,
+          0.248048,
+          0.227367,
+          0.205896,
+          0.189738,
+          0.174999,
+          0.164271,
+          0.151782,
+          0.144685,
+          0.137831,
+          0.129263,
+          0.124757,
+          0.120305,
+          0.117621,
+          0.11311,
+          0.108666,
+          0.106229,
+          0.102799,
+          0.101208,
+          0.0987302,
+          0.0968527,
+          0.0953931,
+          0.0926715,
+          0.0920925,
+          0.08982,
+          0.0887791,
+          0.087993,
+          0.0873517,
+          0.0859922,
+          0.0857081,
+          0.0844668,
+          0.0819304,
+          0.0819977,
+          0.0812165,
+          0.0802194,
+          0.0799077,
+          0.07924,
+          0.0784578,
+          0.0778818,
+          0.0772949,
+          0.0771867,
+          0.0765192,
+          0.0765465,
+          0.0749129,
+          0.075356,
+          0.0749426,
+          0.0745647,
+          0.0751544,
+          0.0741524,
+          0.0738344,
+          0.073635,
+          0.0739239,
+          0.0725517,
+          0.0708068,
+          0.0721809,
+          0.0713118,
+          0.0729191,
+          0.0720729,
+          0.0712218,
+          0.072197,
+          0.0716631,
+          0.0713666,
+          0.0694635,
+          0.0704505,
+          0.0703741,
+          0.0697474,
+          0.0700765,
+          0.0692834,
+          0.0695927,
+          0.0685586,
+          0.0694324,
+          0.0688498,
+          0.068163,
+          0.0689507,
+          0.0684918,
+          0.0689097,
+          0.0688535,
+          0.0681052,
+          0.0684691,
+          0.0683056,
+          0.0673444,
+          0.0681065,
+          0.0673295,
+          0.0667035,
+          0.068193,
+          0.0670333,
+          0.0681065,
+          0.0674427,
+          0.0674519,
+          0.0675324,
+          0.0681852,
+          0.0667242,
+          0.0673613,
+          0.0678988,
+          0.0671024,
+          0.066354,
+          0.0665676,
+          0.067505,
+          0.0660174,
+          0.0678702,
+          0.0672036,
+          0.0673463,
+          0.0679897,
+          0.0664197,
+          0.0674648,
+          0.0663817,
+          0.0662107,
+          0.0659755,
+          0.0659254,
+          0.0661494,
+          0.0669857,
+          0.0662597,
+          0.0655934,
+          0.0666413,
+          0.0652608,
+          0.0660126,
+          0.0657421
+        ]
+      }
+    },
+    "EASE": {
+      "best_params": {
+        "lam": 300
+      },
+      "best_valid_ndcg": 0.13065,
+      "n_configs": 7,
+      "trials": [
+        {
+          "params": {
+            "lam": 30
+          },
+          "valid_ndcg": 0.119355
+        },
+        {
+          "params": {
+            "lam": 100
+          },
+          "valid_ndcg": 0.128362
+        },
+        {
+          "params": {
+            "lam": 200
+          },
+          "valid_ndcg": 0.12794
+        },
+        {
+          "params": {
+            "lam": 300
+          },
+          "valid_ndcg": 0.13065
+        },
+        {
+          "params": {
+            "lam": 500
+          },
+          "valid_ndcg": 0.130026
+        },
+        {
+          "params": {
+            "lam": 1000
+          },
+          "valid_ndcg": 0.126986
+        },
+        {
+          "params": {
+            "lam": 3000
+          },
+          "valid_ndcg": 0.115928
+        }
+      ]
+    }
+  },
+  "test": {
+    "MostPopular": {
+      "precision": 0.0391304,
+      "recall": 0.0861303,
+      "ndcg": 0.0727353,
+      "map": 0.0384658,
+      "hit_rate": 0.286232,
+      "ndcg_ci": [
+        0.0629984,
+        0.0827239
+      ],
+      "coverage": 0.0558859,
+      "avg_popularity": 0.30756,
+      "novelty": 1.72908
+    },
+    "RecentPopular": {
+      "precision": 0.039372,
+      "recall": 0.0863722,
+      "ndcg": 0.0716407,
+      "map": 0.0375612,
+      "hit_rate": 0.27657,
+      "ndcg_ci": [
+        0.0622294,
+        0.081725
+      ],
+      "coverage": 0.0653983,
+      "avg_popularity": 0.299927,
+      "novelty": 1.77618
+    },
+    "ItemKNN": {
+      "precision": 0.0661836,
+      "recall": 0.158361,
+      "ndcg": 0.128167,
+      "map": 0.0739006,
+      "hit_rate": 0.405797,
+      "ndcg_ci": [
+        0.115115,
+        0.141054
+      ],
+      "coverage": 0.184304,
+      "avg_popularity": 0.208462,
+      "novelty": 2.40846
+    },
+    "iALS": {
+      "precision": 0.0729469,
+      "recall": 0.169698,
+      "ndcg": 0.131914,
+      "map": 0.0739951,
+      "hit_rate": 0.431159,
+      "ndcg_ci": [
+        0.118748,
+        0.14515
+      ],
+      "coverage": 0.183115,
+      "avg_popularity": 0.201541,
+      "novelty": 2.44311
+    },
+    "BPR": {
+      "precision": 0.0677536,
+      "recall": 0.159278,
+      "ndcg": 0.123232,
+      "map": 0.0695447,
+      "hit_rate": 0.405797,
+      "ndcg_ci": [
+        0.11049,
+        0.136444
+      ],
+      "coverage": 0.277051,
+      "avg_popularity": 0.182634,
+      "novelty": 2.67245
+    },
+    "EASE": {
+      "precision": 0.0717391,
+      "recall": 0.167411,
+      "ndcg": 0.136821,
+      "map": 0.0786521,
+      "hit_rate": 0.433575,
+      "ndcg_ci": [
+        0.123942,
+        0.150491
+      ],
+      "coverage": 0.203329,
+      "avg_popularity": 0.2001,
+      "novelty": 2.46919
+    }
+  },
+  "best_model": "EASE",
+  "paired_ndcg_differences": {
+    "RecentPopular_vs_MostPopular": {
+      "diff": -0.00109465,
+      "ci_low": -0.00503733,
+      "ci_high": 0.00287313,
+      "p_value": 0.6
+    },
+    "ItemKNN_vs_MostPopular": {
+      "diff": 0.0554321,
+      "ci_low": 0.0419752,
+      "ci_high": 0.068982,
+      "p_value": 0.0
+    },
+    "iALS_vs_MostPopular": {
+      "diff": 0.0591786,
+      "ci_low": 0.0463356,
+      "ci_high": 0.0718898,
+      "p_value": 0.0
+    },
+    "BPR_vs_MostPopular": {
+      "diff": 0.0504972,
+      "ci_low": 0.0365518,
+      "ci_high": 0.0642942,
+      "p_value": 0.0
+    },
+    "EASE_vs_MostPopular": {
+      "diff": 0.0640854,
+      "ci_low": 0.051041,
+      "ci_high": 0.0772131,
+      "p_value": 0.0
+    },
+    "EASE_vs_iALS": {
+      "diff": 0.0049068,
+      "ci_low": -0.000789853,
+      "ci_high": 0.0113963,
+      "p_value": 0.096
+    }
+  },
+  "activity_buckets": [
+    {
+      "bucket": "1-10",
+      "n_users": 123,
+      "ndcg": {
+        "MostPopular": 0.0852313,
+        "RecentPopular": 0.0903241,
+        "ItemKNN": 0.191675,
+        "iALS": 0.179786,
+        "BPR": 0.186076,
+        "EASE": 0.194177
+      },
+      "ndcg_ci": {
+        "MostPopular": [
+          0.0586014,
+          0.113844
+        ],
+        "RecentPopular": [
+          0.0647859,
+          0.118272
+        ],
+        "ItemKNN": [
+          0.153982,
+          0.230403
+        ],
+        "iALS": [
+          0.142565,
+          0.218183
+        ],
+        "BPR": [
+          0.146122,
+          0.227738
+        ],
+        "EASE": [
+          0.155077,
+          0.235217
+        ]
+      }
+    },
+    {
+      "bucket": "11-30",
+      "n_users": 266,
+      "ndcg": {
+        "MostPopular": 0.0667785,
+        "RecentPopular": 0.0699884,
+        "ItemKNN": 0.145374,
+        "iALS": 0.135923,
+        "BPR": 0.128627,
+        "EASE": 0.144718
+      },
+      "ndcg_ci": {
+        "MostPopular": [
+          0.0500112,
+          0.0863109
+        ],
+        "RecentPopular": [
+          0.052962,
+          0.0888742
+        ],
+        "ItemKNN": [
+          0.120542,
+          0.170483
+        ],
+        "iALS": [
+          0.112665,
+          0.159932
+        ],
+        "BPR": [
+          0.105873,
+          0.151094
+        ],
+        "EASE": [
+          0.122028,
+          0.16967
+        ]
+      }
+    },
+    {
+      "bucket": "31-100",
+      "n_users": 290,
+      "ndcg": {
+        "MostPopular": 0.0799642,
+        "RecentPopular": 0.0686845,
+        "ItemKNN": 0.114331,
+        "iALS": 0.125613,
+        "BPR": 0.107833,
+        "EASE": 0.126627
+      },
+      "ndcg_ci": {
+        "MostPopular": [
+          0.0636033,
+          0.0963074
+        ],
+        "RecentPopular": [
+          0.0533417,
+          0.0846746
+        ],
+        "ItemKNN": [
+          0.0934697,
+          0.13467
+        ],
+        "iALS": [
+          0.103128,
+          0.147609
+        ],
+        "BPR": [
+          0.0876575,
+          0.128211
+        ],
+        "EASE": [
+          0.104269,
+          0.149247
+        ]
+      }
+    },
+    {
+      "bucket": "101+",
+      "n_users": 149,
+      "ndcg": {
+        "MostPopular": 0.0589845,
+        "RecentPopular": 0.0649208,
+        "ItemKNN": 0.071955,
+        "iALS": 0.0975028,
+        "BPR": 0.0916956,
+        "EASE": 0.0952132
+      },
+      "ndcg_ci": {
+        "MostPopular": [
+          0.0385999,
+          0.0816042
+        ],
+        "RecentPopular": [
+          0.044086,
+          0.0871658
+        ],
+        "ItemKNN": [
+          0.0495541,
+          0.0980793
+        ],
+        "iALS": [
+          0.0715408,
+          0.126278
+        ],
+        "BPR": [
+          0.0654777,
+          0.122029
+        ],
+        "EASE": [
+          0.0680012,
+          0.128348
+        ]
+      }
+    }
+  ],
+  "protocols": {
+    "random": {
+      "summary": {
+        "n_train": 88587,
+        "n_valid": 5612,
+        "n_test": 5801,
+        "valid_users": 910,
+        "test_users": 918,
+        "test_positives_of_evaluated_users": 3356,
+        "test_ratings_per_user_min_median_max": [
+          5,
+          5.0,
+          14
+        ]
+      },
+      "ndcg": {
+        "MostPopular": 0.102654,
+        "RecentPopular": 0.0948199,
+        "ItemKNN": 0.238742,
+        "iALS": 0.271144,
+        "BPR": 0.260197,
+        "EASE": 0.283189
+      },
+      "ndcg_ci": {
+        "MostPopular": [
+          0.0924465,
+          0.113858
+        ],
+        "RecentPopular": [
+          0.0845608,
+          0.104831
+        ],
+        "ItemKNN": [
+          0.223255,
+          0.254812
+        ],
+        "iALS": [
+          0.255098,
+          0.28721
+        ],
+        "BPR": [
+          0.244018,
+          0.27595
+        ],
+        "EASE": [
+          0.266594,
+          0.299944
+        ]
+      },
+      "recall": {
+        "MostPopular": 0.135032,
+        "RecentPopular": 0.132827,
+        "ItemKNN": 0.288698,
+        "iALS": 0.324128,
+        "BPR": 0.319692,
+        "EASE": 0.337108
+      }
+    },
+    "per_user_temporal": {
+      "summary": {
+        "n_train": 88587,
+        "n_valid": 5612,
+        "n_test": 5801,
+        "valid_users": 838,
+        "test_users": 828,
+        "test_positives_of_evaluated_users": 3201,
+        "test_ratings_per_user_min_median_max": [
+          5,
+          5.0,
+          14
+        ]
+      },
+      "ndcg": {
+        "MostPopular": 0.0727353,
+        "RecentPopular": 0.0716407,
+        "ItemKNN": 0.128167,
+        "iALS": 0.131914,
+        "BPR": 0.123232,
+        "EASE": 0.136821
+      },
+      "ndcg_ci": {
+        "MostPopular": [
+          0.0629984,
+          0.0827239
+        ],
+        "RecentPopular": [
+          0.0622294,
+          0.081725
+        ],
+        "ItemKNN": [
+          0.115115,
+          0.141054
+        ],
+        "iALS": [
+          0.118748,
+          0.14515
+        ],
+        "BPR": [
+          0.11049,
+          0.136444
+        ],
+        "EASE": [
+          0.123942,
+          0.150491
+        ]
+      },
+      "recall": {
+        "MostPopular": 0.0861303,
+        "RecentPopular": 0.0863722,
+        "ItemKNN": 0.158361,
+        "iALS": 0.169698,
+        "BPR": 0.159278,
+        "EASE": 0.167411
+      }
+    },
+    "global_temporal": {
+      "summary": {
+        "n_train": 79999,
+        "n_valid": 9998,
+        "n_test": 10003,
+        "valid_users": 70,
+        "test_users": 76,
+        "test_positives_of_evaluated_users": 1539,
+        "test_ratings_per_user_min_median_max": [
+          0,
+          0.0,
+          428
+        ],
+        "valid_cutoff": "1998-03-07",
+        "test_cutoff": "1998-03-31"
+      },
+      "ndcg": {
+        "MostPopular": 0.154269,
+        "RecentPopular": 0.197048,
+        "ItemKNN": 0.214227,
+        "iALS": 0.224373,
+        "BPR": 0.208876,
+        "EASE": 0.215695
+      },
+      "ndcg_ci": {
+        "MostPopular": [
+          0.107217,
+          0.209989
+        ],
+        "RecentPopular": [
+          0.144702,
+          0.256161
+        ],
+        "ItemKNN": [
+          0.152687,
+          0.282202
+        ],
+        "iALS": [
+          0.164085,
+          0.292555
+        ],
+        "BPR": [
+          0.150039,
+          0.273815
+        ],
+        "EASE": [
+          0.159569,
+          0.278751
+        ]
+      },
+      "recall": {
+        "MostPopular": 0.0847951,
+        "RecentPopular": 0.139126,
+        "ItemKNN": 0.124005,
+        "iALS": 0.143877,
+        "BPR": 0.119293,
+        "EASE": 0.142002
+      }
+    }
+  },
+  "cold_start_global_split": {
+    "active_test_users": 153,
+    "new_users_without_history": 76,
+    "warm_users_evaluated": 76,
+    "ndcg_new_users": {
+      "MostPopular": 0.332441,
+      "RecentPopular": 0.372801
+    }
+  },
+  "explanation_example": {
+    "rule": "first evaluated user (lowest id) with 20-40 liked movies in the fitting data",
+    "user_id": 2,
+    "n_liked_in_history": 39,
+    "recently_liked": [
+      "Air Force One (1997)",
+      "Fly Away Home (1996)",
+      "Rainmaker, The (1997)",
+      "Good Will Hunting (1997)",
+      "Shall We Dance? (1996)"
+    ],
+    "held_out_liked": [
+      "As Good As It Gets (1997)"
+    ],
+    "hits_in_top_k": 0,
+    "top_k": [
+      "Return of the Jedi (1983)",
+      "Lone Star (1996)",
+      "Dead Man Walking (1995)",
+      "Big Night (1996)",
+      "Mr. Holland's Opus (1995)",
+      "Boot, Das (1981)",
+      "Chasing Amy (1997)",
+      "People vs. Larry Flynt, The (1996)",
+      "Trainspotting (1996)",
+      "Spitfire Grill, The (1996)"
+    ],
+    "recommendations": [
+      {
+        "item": 180,
+        "title": "Return of the Jedi (1983)",
+        "score": 0.415526,
+        "because": [
+          {
+            "item": 49,
+            "title": "Star Wars (1977)",
+            "contribution": 0.163613
+          },
+          {
+            "item": 256,
+            "title": "Men in Black (1997)",
+            "contribution": 0.0545674
+          }
+        ],
+        "hit": false
+      },
+      {
+        "item": 123,
+        "title": "Lone Star (1996)",
+        "score": 0.375153,
+        "because": [
+          {
+            "item": 99,
+            "title": "Fargo (1996)",
+            "contribution": 0.0393738
+          },
+          {
+            "item": 284,
+            "title": "Secrets & Lies (1996)",
+            "contribution": 0.0285588
+          }
+        ],
+        "hit": false
+      },
+      {
+        "item": 8,
+        "title": "Dead Man Walking (1995)",
+        "score": 0.359887,
+        "because": [
+          {
+            "item": 275,
+            "title": "Leaving Las Vegas (1995)",
+            "contribution": 0.0509658
+          },
+          {
+            "item": 285,
+            "title": "English Patient, The (1996)",
+            "contribution": 0.0401286
+          }
+        ],
+        "hit": false
+      },
+      {
+        "item": 136,
+        "title": "Big Night (1996)",
+        "score": 0.345155,
+        "because": [
+          {
+            "item": 284,
+            "title": "Secrets & Lies (1996)",
+            "contribution": 0.0430213
+          },
+          {
+            "item": 274,
+            "title": "Sense and Sensibility (1995)",
+            "contribution": 0.0322696
+          }
+        ],
+        "hit": false
+      },
+      {
+        "item": 14,
+        "title": "Mr. Holland's Opus (1995)",
+        "score": 0.323525,
+        "because": [
+          {
+            "item": 281,
+            "title": "Time to Kill, A (1996)",
+            "contribution": 0.0373205
+          },
+          {
+            "item": 110,
+            "title": "Truth About Cats & Dogs, The (1996)",
+            "contribution": 0.0276378
+          }
+        ],
+        "hit": false
+      }
+    ]
+  }
+}

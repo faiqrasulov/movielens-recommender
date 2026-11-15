@@ -1,7 +1,7 @@
 # MovieLens Top-N Recommender (`recsys`)
 
-Top-N movie recommendation evaluated without leakage: a temporal split, strong simple baselines,
-and implicit ALS, BPR and EASE^R built from scratch in NumPy/SciPy, compared on accuracy
+Top-N movie recommendation evaluated on a temporal split instead of a random one: strong simple
+baselines, and implicit ALS, BPR and EASE^R built from scratch in NumPy/SciPy, compared on accuracy
 **and** on popularity bias.
 
 [![CI](https://github.com/faiqrasulov/movielens-recommender/actions/workflows/ci.yml/badge.svg)](https://github.com/faiqrasulov/movielens-recommender/actions/workflows/ci.yml)
@@ -53,12 +53,13 @@ disliked films. Every rated movie, whatever the rating, is excluded from that us
 recommendations: a watched film is never a useful recommendation. All models rank the full
 catalogue of 1,682 movies (no sampled negatives).
 
-**Leakage-free split (main protocol).** For each user, the 5 most recent ratings are the test set
+**Per-user temporal split (main protocol).** For each user, the 5 most recent ratings are the test set
 and the 5 before them the validation set. MovieLens stored ratings in batches: 75.8% of ratings
 share their second with another rating by the same user. So the cut is moved to the start of a
 batch, and every training rating is *strictly earlier* than every held-out rating of that user
 (test sets have 5-14 ratings, median 5). Hyperparameters are chosen on validation; the test set is
-used once, after refitting on train + validation.
+used once, after refitting on train + validation. This keeps each user's own future out of
+training, but not other users' later ratings; the global time split below removes that as well.
 
 **Two more protocols run with the same tuned models.**
 - *Random split* with exactly the same number of held-out ratings per user. Only the time order
